@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Rapid IOT Devices 1
+                    Rapid IOT
                 </div>
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
