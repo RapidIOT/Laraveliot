@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Rapid IOT
+                    Rapid IOT Devices
                 </div>
 
                 <div class="links">
