@@ -19,7 +19,24 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-// Route::resource('students', 'StudentController');
 Route::resource('room1', 'Room1Controller');
-Route::get('device/{id}', [Room1Controller::class, 'getDetailsByUserID']);
-Route::post('device/{id}', [Room1Controller::class, 'updateDetailsByUserID']);
+// Route::get('device/{id}', [Room1Controller::class, 'getDetailsByUserID']);
+
+
+Route::post('login', 'Api\AuthController@login'); 
+
+Route::get('status', function(){ return "Api is working fine";});
+
+Route::group([
+    'middleware' => 'auth:api',
+    // 'prefix' => 'auth'
+], function () {
+    Route::get('device/{id}', [Room1Controller::class, 'getDetailsByUserID']);
+    Route::post('device/{id}', [Room1Controller::class, 'updateDetailsByUserID']);
+
+    // Route::post('login', 'AuthController@login');
+    // Route::post('logout', 'AuthController@logout');
+    // Route::post('refresh', 'AuthController@refresh');
+    // Route::post('me', 'AuthController@me');
+
+});

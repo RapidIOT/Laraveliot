@@ -117,7 +117,8 @@ class Room1Controller extends Controller
     public function getDetailsByUserID($user_id)
     {
         $device = Room1::where('user_id', $user_id)->first();
-        return $device;
+        // return $device;
+        return response()->json(['data'=>$device],200); 
     }
 
 
