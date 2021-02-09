@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
-use App\Room1;
+
+use App\Device;
 use Illuminate\Http\Request;
 
-class Room1Controller extends Controller
+class DeviceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class Room1Controller extends Controller
     public function index()
     {
         //
-        return Room1::all();
+        return Device::all();
     }
 
     /**
@@ -37,33 +37,33 @@ class Room1Controller extends Controller
     public function store(Request $request)
     {
         //
-        $room1=new Room1();
-        $room1->user_id = $request->user_id;
-        $room1->power_points = $request->power_points;
-        $room1->save();
-        return $room1;
+        $device=new Device();
+        $device->userId = $request->userId;
+        $device->powerPins = $request->powerPins;
+        $device->save();
+        return $device;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Room1  $room1
+     * @param  \App\Device  $device
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
-        $Room1=Room1::find($id);
-        return $Room1;
+        $device=Device::find($id);
+        return $device;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Room1  $room1
+     * @param  \App\Device  $device
      * @return \Illuminate\Http\Response
      */
-    public function edit(Room1 $room1)
+    public function edit(Device $device)
     {
         //
     }
@@ -72,70 +72,70 @@ class Room1Controller extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Room1  $room1
+     * @param  \App\Device  $device
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //
-        $room1=Room1::find($id);
-        if($room1){
-            $room1->user_id = $request->user_id;
-            $room1->power_points = $request->power_points;
-            $room1->save();
+
+        $device=Device::find($id);
+        if($device){
+            $device->userId = $request->userId;
+            $device->powerPins = $request->powerPins;
+            $device->save();
         }else{
             return "Student Required Not Found";
         }
         //you can add custom message here
-        return $room1;
+        return $device;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Room1  $room1
+     * @param  \App\Device  $device
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
-        $room1=Room1::find($id);
-        if($room1){
-            $room1->delete();
+
+        $device=Device::find($id);
+        if($device){
+            $device->delete();
         }else{
             return "Student Required Not Found";
         }
         //you can add custom message here
-        return $room1;
+        return $device;
     }
 
 
 
-
-
-
-    public function getDetailsByUserID($user_id)
+    public function getDevicesByUserID($userId)
     {
-        $device = Room1::where('user_id', $user_id)->first();
+        $device = Device::where('userId', $userId)->first();
         // return $device;
         return response()->json(['data'=>$device],200); 
     }
 
 
-    public function updateDetailsByUserID(Request $request, $user_id)
+    public function updateDevicesByUserID(Request $request, $userId)
     {
-        // return $user_id;
-        $room1=Room1::where('user_id', $user_id)->first();
-        if($room1){
-            // $room1->user_id = $request->user_id;
-            $room1->power_points = $request->power_points;
-            $room1->save();
+        // return $userId;
+        $device=Device::where('userId', $userId)->first();
+        if($device){
+            // $room1->userId = $request->userId;
+            $device->powerPins = $request->powerPins;
+            $device->save();
         }else{
-            return "Student Required Not Found";
+            return "Device Required Not Found";
         }
         //you can add custom message here
-        return $room1;
+        return $device;
     }
+
 
 
 }
