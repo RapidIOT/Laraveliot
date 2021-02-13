@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\Api\DeviceController;
+use App\Http\Controllers\Api\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,7 +27,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 // Route::resource('device', 'DeviceController');
-Route::post('login', 'Api\AuthController@login'); 
+Route::post('login', [AuthController::class, 'login']); 
 Route::group([
     'middleware' => 'auth:api',
     // 'prefix' => 'auth'

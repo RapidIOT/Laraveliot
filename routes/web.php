@@ -20,3 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/devices', 'DeviceController@index')->name('devices');
+Route::get('/add_device', 'DeviceController@create')->name('add_device');
+Route::post('/add_device', 'DeviceController@store');
+Route::get('/edit_device/{id}', 'DeviceController@edit')->name('edit_device');
+Route::post('/update_device/{id}', 'DeviceController@update');
+Route::get('/delete_device/{id}', 'DeviceController@destroy')->name('delete_device');

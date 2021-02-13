@@ -17,6 +17,7 @@ class CreateDevicesTable extends Migration
             $table->id();
             $table->integer('userId')->unsigned();
             $table->text("powerPins");
+            $table->softDeletes();
             $table->timestamps();
             // $table->foreign('userId')->references('id')->on('users');
         });
