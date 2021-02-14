@@ -15,11 +15,11 @@ class CreateDevicesTable extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
-            $table->integer('userId')->unsigned();
+            $table->bigInteger('userId')->unsigned();
             $table->text("powerPins");
             $table->softDeletes();
             $table->timestamps();
-            // $table->foreign('userId')->references('id')->on('users');
+            $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

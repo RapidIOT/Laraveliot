@@ -28,6 +28,8 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+        // print_r($request);
+        // return $request->header('username');
         // return "test";
 
         //return $request->all();

@@ -45,7 +45,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
-
+        $this->mapEmbeddedApiRoutes();
         //
     }
 
@@ -76,5 +76,14 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+
+
+    protected function mapEmbeddedApiRoutes()
+    {
+        Route::prefix('embedded-api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/embedded-api.php'));
     }
 }
