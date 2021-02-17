@@ -31,8 +31,8 @@
                             @foreach ($devicesArr as $device)
                             <tr>
                                 <th scope="row">{{$device->id}}</th>
-                                <td>{{$device->powerPins}}</td>
-                                <td>{{$device->created_at}}</td>
+                                <td>{{$device->name}}</td>
+                                <td>{{$device->details}}</td>
                                 <td>{{$device->updated_at}}</td>
                                 <td><a href="edit_device/{{$device->id}}">Edit</a> | <a href="delete_device/{{$device->id}}">Delete</a></td>
                               </tr>

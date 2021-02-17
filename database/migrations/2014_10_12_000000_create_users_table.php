@@ -24,8 +24,11 @@ class CreateUsersTable extends Migration
             $table->string('zipcode');
             $table->string('avatar')->default('user.png');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->bigInteger('createed_by_id')->nullable();
+            $table->boolean('is_active')->default(0);
+            $table->boolean('is_expired')->default(0);
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

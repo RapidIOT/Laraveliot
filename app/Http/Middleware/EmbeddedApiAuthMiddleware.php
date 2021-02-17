@@ -16,15 +16,8 @@ class EmbeddedApiAuthMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // return $request;
-        // $credentials = request(['email', 'password']);
-        // if (!Auth::attempt($credentials)) {
-        //     return response()->json(['error' => 'Embedded Unauthorized'], 401);
-        // }
-        if(Auth::onceBasic()){
-            return response()->json(['error' => 'Embedded Unauthorized'], 401);
-        }else{
-            return $next($request);
+        if(!Auth::onceBasic()){
+           return $next($request);
         }
     }
 }

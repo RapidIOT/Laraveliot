@@ -518,8 +518,10 @@ class ComposerStaticInit64ffff0e147e1d7ad0f2a71c01a5e6ed
     );
 
     public static $classMap = array (
+        'App\\Activities' => __DIR__ . '/../..' . '/app/Activities.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Device' => __DIR__ . '/../..' . '/app/Device.php',
+        'App\\DevicePins' => __DIR__ . '/../..' . '/app/DevicePins.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Api\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/AuthController.php',
         'App\\Http\\Controllers\\Api\\DeviceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/DeviceController.php',
@@ -531,10 +533,13 @@ class ComposerStaticInit64ffff0e147e1d7ad0f2a71c01a5e6ed
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DeviceController' => __DIR__ . '/../..' . '/app/Http/Controllers/DeviceController.php',
+        'App\\Http\\Controllers\\DevicePinsController' => __DIR__ . '/../..' . '/app/Http/Controllers/DevicePinsController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\UserDevicesController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserDevicesController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
+        'App\\Http\\Middleware\\EmbeddedApiAuthMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/EmbeddedApiAuthMiddleware.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
@@ -547,6 +552,7 @@ class ComposerStaticInit64ffff0e147e1d7ad0f2a71c01a5e6ed
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\UserDevices' => __DIR__ . '/../..' . '/app/UserDevices.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/CorsService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
