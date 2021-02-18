@@ -96,19 +96,23 @@ class DevicePinsController extends Controller
             // return DevicePins::where('deviceId',$deviceId)->get(['name', 'pinNumber', 'pinStatus']);
             // return DevicePins::where('deviceId',$deviceId)->pluck('pinStatus');
             $json = [
-                'success' => true,
-                'data' => [
-                    'powerPins' => implode(DevicePins::where('deviceNumber',$deviceNumber)->pluck('pinStatus')->toArray()),
-                ],
+                // 'success' => true,
+                // 'data' => [
+                //     'powerPins' => implode(DevicePins::where('deviceNumber',$deviceNumber)->pluck('pinStatus')->toArray()),
+                // ],
+
+                'pins' => implode(DevicePins::where('deviceNumber',$deviceNumber)->pluck('pinStatus')->toArray())
             ];
             return response()->json($json, 200);
         }else{
             $json = [
+                // 'success' => false,
+                // 'error' => [
+                //     'code' => '',
+                //     'message' => 'No Device Found with This ID / You Don\'t have access to this device',
+                // ],
                 'success' => false,
-                'error' => [
-                    'code' => '',
-                    'message' => 'No Device Found with This ID / You Don\'t have access to this device',
-                ],
+                'msg' => 'No Device Found with This ID / You Don\'t have access to this device'
             ];
             return response()->json($json, 401);
         }
@@ -119,7 +123,7 @@ class DevicePinsController extends Controller
     public function postDevicePinsByDeviceNumber(Request $request, DevicePins $devicePins, $deviceNumber){
         // return str_split($request->powerPins,1);
             // return $deviceNumber;
-        $inputData=str_split($request->powerPins,1);
+        $inputData=str_split($request->pins,1);
         $userdeviceNumbersArr=UserDevices::where([['userId',Auth::id()],['is_active',1]])->pluck('deviceNumber')->toArray();
         if (in_array($deviceNumber,$userdeviceNumbersArr)) {
             $deviceRecordsArr = DevicePins::where('deviceNumber',$deviceNumber)->pluck('id')->toArray();
@@ -131,19 +135,22 @@ class DevicePinsController extends Controller
                 // }
             }
             $json = [
-                'success' => true,
-                'data' => [
-                    'message' => "Pins Updated to: ".$request->powerPins,
-                ],
+                // 'success' => true,
+                // 'data' => [
+                //     'message' => "Pins Updated to: ".$request->powerPins,
+                // ],
+                'msg' => "Updated"
             ];
             return response()->json($json, 200);
         }else{
             $json = [
+                // 'success' => false,
+                // 'error' => [
+                //     'code' => '',
+                //     'message' => 'No Device Found with This ID / You Don\'t have access to this device',
+                // ],
                 'success' => false,
-                'error' => [
-                    'code' => '',
-                    'message' => 'No Device Found with This ID / You Don\'t have access to this device',
-                ],
+                'msg' => 'No Device Found with This ID / You Don\'t have access to this device'
             ];
             return response()->json($json, 401);
         }
