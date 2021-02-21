@@ -29,5 +29,19 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('/add_device', 'DeviceController@store');
     Route::get('/edit_device/{id}', 'DeviceController@edit')->name('edit_device');
     Route::post('/update_device/{id}', 'DeviceController@update');
-    Route::get('/delete_device/{id}', 'DeviceController@destroy')->name('delete_device');    
+    Route::get('/delete_device/{id}', 'DeviceController@destroy')->name('delete_device'); 
+    
+    
+    Route::get('/access_device_pins/{id}', 'DevicePinsController@getDevicePinsByDeviceId')->name('access_device_pins');    
+    Route::post('/update_device_pins/{id}', 'DevicePinsController@update')->name('update_device_pins');    
+   
+   
+    Route::get('/reports', 'ActivitiesController@index')->name('reports');    
+
+
+    Route::get('/profile', 'UserController@index')->name('profile');   
+    Route::get('/edit_profile', 'UserController@edit')->name('edit_profile');   
+    Route::post('/update_profile', 'UserController@update');   
+    
+    
 });

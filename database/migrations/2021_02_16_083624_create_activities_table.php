@@ -21,8 +21,8 @@ class CreateActivitiesTable extends Migration
             $table->text("details")->nullable();
             $table->text("remarks")->nullable();
             $table->text("activityType");
-            $table->smallInteger('pinNumber')->unsigned();
-            $table->boolean('pinStatus')->default(0);
+            $table->string('pinNumber')->unsigned();
+            $table->string('pinStatus')->default(0);
             $table->softDeletes();
             $table->timestamps();
             // $table->foreign('deviceId')->references('id')->on('devices')->onDelete('cascade');

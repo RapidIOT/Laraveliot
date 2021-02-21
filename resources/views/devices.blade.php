@@ -15,33 +15,50 @@
                     @endif
 
                     {{session('message')}}
-                    
+                    @foreach ($devicesArr as $device)
                     <div class="table-responsive">
-                    <table class="table table-hover table-bordered">
+                    <table class="table table-bordered">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Power Points</th>
-                            <th scope="col">Created At</th>
-                            <th scope="col">Updated At</th>
+                            <th scope="col">Device Number</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Is Active</th>
                             <th scope="col">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @foreach ($devicesArr as $device)
+                           
                             <tr>
                                 <th scope="row">{{$device->id}}</th>
+                                <td>{{$device->deviceNumber}}</td>
                                 <td>{{$device->name}}</td>
-                                <td>{{$device->details}}</td>
-                                <td>{{$device->updated_at}}</td>
-                                <td><a href="edit_device/{{$device->id}}">Edit</a> | <a href="delete_device/{{$device->id}}">Delete</a></td>
+                                <td>{{$device->is_active}}</td>
+                                <td><a href="access_device_pins/{{$device->deviceNumber}}">Access</a> | <a href="edit_device/{{$device->id}}">Edit</a> | <a href="delete_device/{{$device->id}}">Delete</a></td>
                               </tr>
-                            @endforeach
-                          
+
+
+                              {{-- <tr>
+                                <td colspan="5">
+                                  @foreach ($device->pins as $pin)
+                                  <div>
+
+                                    {{$pin->id}} - 
+                                  {{$pin->name}} - 
+
+                                  <label class="switch">
+                                    <input type="checkbox" name="pinStatus" id="pinStatus" value="1" {{($pin->pinStatus == 1 ? ' checked' : '')}}>
+                                    <span class="slider round"></span>
+                                  </label>
+                                </div>
+                                  @endforeach
+                                </td>
+                              </tr> --}}
+                              
                         </tbody>
                       </table>
                     </div>
-
+                    @endforeach
                 </div>
             </div>
         </div>

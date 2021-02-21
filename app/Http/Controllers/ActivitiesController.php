@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Activities;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ActivitiesController extends Controller
 {
@@ -15,6 +16,7 @@ class ActivitiesController extends Controller
     public function index()
     {
         //
+        return view('reports')->with('reports',Activities::where('userId',Auth::id())->get());
     }
 
     /**

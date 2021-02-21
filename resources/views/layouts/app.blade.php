@@ -67,6 +67,12 @@
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="/reports" role="button" v-pre>
+                                Reports
+                            </a>
+                        </li>
+
                         {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Dropdown
@@ -86,6 +92,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="/profile">
+                                        {{ __('Profile') }}
+                                    </a>
+
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -108,5 +120,7 @@
         </main>
     </div>
 
+    @yield('footerJS')
+    @yield('footerCSS')
    </body>
 </html>

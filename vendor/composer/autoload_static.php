@@ -36,6 +36,7 @@ class ComposerStaticInit64ffff0e147e1d7ad0f2a71c01a5e6ed
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
+        'b4e3f29b106af37a2bb239f73cdf68c7' => __DIR__ . '/../..' . '/app/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -523,8 +524,12 @@ class ComposerStaticInit64ffff0e147e1d7ad0f2a71c01a5e6ed
         'App\\Device' => __DIR__ . '/../..' . '/app/Device.php',
         'App\\DevicePins' => __DIR__ . '/../..' . '/app/DevicePins.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\ActivitiesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ActivitiesController.php',
+        'App\\Http\\Controllers\\Api\\ActivitiesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/ActivitiesController.php',
         'App\\Http\\Controllers\\Api\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/AuthController.php',
         'App\\Http\\Controllers\\Api\\DeviceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/DeviceController.php',
+        'App\\Http\\Controllers\\Api\\DevicePinsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/DevicePinsController.php',
+        'App\\Http\\Controllers\\Api\\UserDevicesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/UserDevicesController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -534,7 +539,12 @@ class ComposerStaticInit64ffff0e147e1d7ad0f2a71c01a5e6ed
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DeviceController' => __DIR__ . '/../..' . '/app/Http/Controllers/DeviceController.php',
         'App\\Http\\Controllers\\DevicePinsController' => __DIR__ . '/../..' . '/app/Http/Controllers/DevicePinsController.php',
+        'App\\Http\\Controllers\\EmbeddedApi\\ActivitiesController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmbeddedApi/ActivitiesController.php',
+        'App\\Http\\Controllers\\EmbeddedApi\\DeviceController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmbeddedApi/DeviceController.php',
+        'App\\Http\\Controllers\\EmbeddedApi\\DevicePinsController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmbeddedApi/DevicePinsController.php',
+        'App\\Http\\Controllers\\EmbeddedApi\\UserDevicesController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmbeddedApi/UserDevicesController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Controllers\\UserDevicesController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserDevicesController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',

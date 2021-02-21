@@ -70,6 +70,31 @@ class DevicePinsController extends Controller
     public function update(Request $request, DevicePins $devicePins)
     {
         //
+        // {"id":"1","_token":"b8dEmtdrxToY6JoWMFLfQleVshp0PXUZM3J3JSd4","pinStatus":"0"}
+        // return $request;
+        // return $devicePins;
+        // $devicePins->pinStatus=$request->pinStatus;
+        // $devicePins->save();
+        // return $devicePins;
+        
+        $devicePins=DevicePins::find($request->id);
+        if($devicePins){
+            $devicePins->pinStatus=$request->pinStatus;
+            // $devicePins->name = $request->name;
+            // $devicePins->is_active = $request->is_active?'1':'0';
+            $saved = $devicePins->save();
+        if(!$saved){
+            abort(500, 'Error');
+        }else{
+            logActivity($devicePins->deviceNumber,"userID","Pin Updated","remarks","Pin Updated",$devicePins->pinNumber,$devicePins->pinStatus);
+            $request->session()->flash('message', "Pin Updated");
+            return response()->json(['success' => true,'message'=>'Pin Updated'],200);
+            // return redirect('devices');
+        }
+        }else{
+            return "Device Not Found";
+        }
+
     }
 
     /**
@@ -82,4 +107,12 @@ class DevicePinsController extends Controller
     {
         //
     }
+
+    public function getDevicePinsByDeviceId(DevicePins $devicePins, $id)
+    {
+        //
+        return view('access_device_pins')->with('devicePins',DevicePins::where('deviceNumber',$id)->get());
+    }
+
+
 }
