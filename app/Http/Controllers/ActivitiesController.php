@@ -16,7 +16,7 @@ class ActivitiesController extends Controller
     public function index()
     {
         //
-        return view('reports')->with('reports',Activities::where('userId',Auth::id())->get());
+        return view('reports')->with('reports',Activities::where('activityById',Auth::id())->get());
     }
 
     /**

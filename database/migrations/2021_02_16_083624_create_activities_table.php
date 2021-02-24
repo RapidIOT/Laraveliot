@@ -15,14 +15,15 @@ class CreateActivitiesTable extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
-            $table->string('deviceNumber');
-            $table->bigInteger('userId')->unsigned();
-            $table->bigInteger('activityById')->unsigned();
-            $table->text("details")->nullable();
-            $table->text("remarks")->nullable();
             $table->text("activityType");
-            $table->string('pinNumber')->unsigned();
+            $table->bigInteger('activityById')->unsigned();
+            // $table->bigInteger('userId')->unsigned();
+            $table->string('deviceNumber');
+            $table->string('deviceStatus');
+            $table->string('pinId');
             $table->string('pinStatus')->default(0);
+            $table->text("details")->nullable();
+            $table->bigInteger('sharedControlWith')->unsigned();
             $table->softDeletes();
             $table->timestamps();
             // $table->foreign('deviceId')->references('id')->on('devices')->onDelete('cascade');

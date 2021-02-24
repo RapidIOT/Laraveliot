@@ -64,7 +64,6 @@ class DeviceController extends Controller
             $request->session()->flash('message', "new device created");
             return redirect('devices');
         }
-        // logActivity();
     }
 
     /**
@@ -101,11 +100,6 @@ class DeviceController extends Controller
      */
     public function update(Request $request)
     {
-        //
-        // return $request;
-        // if($request->is_active){
-
-        // }
         $device=Device::find($request->id);
         if($device){
             $device->name = $request->name;
@@ -114,7 +108,8 @@ class DeviceController extends Controller
         if(!$saved){
             abort(500, 'Error');
         }else{
-            logActivity($device->deviceNumber,"userID","Device Details Updated","remarks","Edit Device");
+            logActivity($activityType="Device Update",$deviceNumber=$device->deviceNumber,$deviceStatus=$device->is_active,$pinId="-",$pinStatus="-",$details="Device Details Updated",$sharedControlWith="0");
+            // logActivity($device->deviceNumber,"userID","Device Details Updated","remarks","Edit Device");
             $request->session()->flash('message', "Device Updated");
             return redirect('devices');
         }

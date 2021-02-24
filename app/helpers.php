@@ -3,16 +3,17 @@ use App\Activities;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-function logActivity($deviceNumber="-",$userId="-",$details="-",$remarks="-",$activityType="-",$pinNumber="-",$pinStatus="-"){
+function logActivity($activityType="-",$deviceNumber="-",$deviceStatus="-",$pinId="-",$pinStatus="-",$details="-",$sharedControlWith="-"){
     $activity=new Activities();
-    $activity->deviceNumber = $deviceNumber;
-    $activity->userId = Auth::id();
-    $activity->activityById = Auth::id();
-    $activity->details = $details;
-    $activity->remarks = $remarks;
     $activity->activityType = $activityType;
-    $activity->pinNumber = $pinNumber;
+    $activity->activityById = Auth::id();
+    $activity->deviceNumber = $deviceNumber;
+    $activity->deviceStatus = $deviceStatus;
+    $activity->activityType = $activityType;
+    $activity->pinId = $pinId;
     $activity->pinStatus = $pinStatus;
+    $activity->details = $details;
+    $activity->sharedControlWith = $sharedControlWith;
     $saved = $activity->save();
     // if(!$saved){
     //     abort(500, 'Error');

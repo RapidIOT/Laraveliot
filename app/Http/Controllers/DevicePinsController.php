@@ -86,7 +86,7 @@ class DevicePinsController extends Controller
         if(!$saved){
             abort(500, 'Error');
         }else{
-            logActivity($devicePins->deviceNumber,"userID","Pin Updated","remarks","Pin Updated",$devicePins->pinNumber,$devicePins->pinStatus);
+            
             $request->session()->flash('message', "Pin Updated");
             return response()->json(['success' => true,'message'=>'Pin Updated'],200);
             // return redirect('devices');
