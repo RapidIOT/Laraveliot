@@ -17,13 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 
 // 'prefix'=>'prefixURL'
-Route::group(['middleware'=>'auth'],function(){
+Route::group(['middleware'=>['auth','verified']],function(){
     Route::get('/devices', 'DeviceController@index')->name('devices');
     Route::get('/add_device', 'DeviceController@create')->name('add_device');
     Route::post('/add_device', 'DeviceController@store');

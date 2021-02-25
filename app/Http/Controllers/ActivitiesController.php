@@ -17,6 +17,7 @@ class ActivitiesController extends Controller
     {
         //
         return view('reports')->with('reports',Activities::where('activityById',Auth::id())->get());
+        // return view('reports')->with('reports',Activities::where('activityById',Auth::id())->paginate(5));
     }
 
     /**
