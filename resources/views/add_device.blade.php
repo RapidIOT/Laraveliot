@@ -18,8 +18,8 @@
                     <form method="POST">
                         @csrf
                         <div class="form-group">
-                          <label for="powerPins">Power Pins</label>
-                          <input type="text" class="form-control" id="powerPins" name="powerPins" aria-describedby="powerPins" placeholder="Power Pins" required>
+                          <label for="deviceNumber">Device Number</label>
+                          <input type="text" class="form-control" id="deviceNumber" name="deviceNumber" aria-describedby="deviceNumber" placeholder="Device Number" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                       </form>

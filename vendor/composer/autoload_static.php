@@ -523,6 +523,7 @@ class ComposerStaticInit64ffff0e147e1d7ad0f2a71c01a5e6ed
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Device' => __DIR__ . '/../..' . '/app/Device.php',
         'App\\DevicePins' => __DIR__ . '/../..' . '/app/DevicePins.php',
+        'App\\DeviceRegistration' => __DIR__ . '/../..' . '/app/DeviceRegistration.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\ActivitiesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ActivitiesController.php',
         'App\\Http\\Controllers\\Api\\ActivitiesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/ActivitiesController.php',

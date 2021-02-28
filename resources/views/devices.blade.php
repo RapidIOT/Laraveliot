@@ -59,9 +59,65 @@
                       </table>
                     </div>
                     @endforeach
+
+
+                    
                 </div>
             </div>
         </div>
+
+
+
+
+
+        <div class="col-md-8">
+          <div class="card">
+              <div class="card-header">{{ __('Shared Devices') }} <a class="btn btn-primary btn-sm float-right" href="/add_device">Add Device</a></div>
+
+              <div class="card-body">
+                  @if (session('status'))
+                      <div class="alert alert-success" role="alert">
+                          {{ session('status') }}
+                      </div>
+                  @endif
+
+                  {{session('message')}}
+                  @foreach ($sharedDevicesArr as $sharedDevice)
+                  <div class="table-responsive">
+                  <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Device Number</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Is Active</th>
+                          <th scope="col">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                         
+                          <tr>
+                              <th scope="row">{{$sharedDevice->id}}</th>
+                              <td>{{$sharedDevice->deviceNumber}}</td>
+                              <td>{{$sharedDevice->name}}</td>
+                              <td>{{$sharedDevice->is_active}}</td>
+                              <td><a href="access_device_pins/{{$sharedDevice->deviceNumber}}">Access</a></td>
+                            </tr>  
+                      </tbody>
+                    </table>
+                  </div>
+                  @endforeach
+
+
+                  
+              </div>
+          </div>
+      </div>
+
+
+
+
+
     </div>
 </div>
 @endsection

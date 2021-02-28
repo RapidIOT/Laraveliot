@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DeviceRegistration;
+
 use App\Device;
 use App\UserDevices;
 use App\DevicePins;
@@ -9,7 +11,7 @@ use App\DevicePins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class DeviceController extends Controller
+class DeviceRegistrationController extends Controller
 {
     
     /**
@@ -20,12 +22,13 @@ class DeviceController extends Controller
     public function index()
     {
         $userDeviceIdsArr=UserDevices::where('userId',Auth::id())->pluck('deviceNumber');
-        // return Device::whereIn('deviceNumber',$userDeviceIdsArr)->get();
-        return view('devices')->with('devicesArr',Device::whereIn('deviceNumber',$userDeviceIdsArr)->get());
+        $userSharedDeviceIdsArr=UserDevices::where('canAccessBy',Auth::id())->where('userId','!=',Auth::id())->pluck('deviceNumber');
+        // return DeviceRegistration::whereIn('deviceNumber',$userDeviceIdsArr)->get();
+        return view('devices')->with(['devicesArr'=>DeviceRegistration::whereIn('deviceNumber',$userDeviceIdsArr)->get(),'sharedDevicesArr'=>DeviceRegistration::whereIn('deviceNumber',$userSharedDeviceIdsArr)->get()]);
         
         // $devicesArr=array();
         // $userDeviceIdsArr=UserDevices::where('userId',Auth::id())->pluck('deviceNumber');
-        // $userDevices= Device::whereIn('deviceNumber',$userDeviceIdsArr)->get();
+        // $userDevices= DeviceRegistration::whereIn('deviceNumber',$userDeviceIdsArr)->get();
         // foreach($userDevices as $userDevice){
         //     $userDevice->pins=DevicePins::where('deviceNumber',$userDevice->deviceNumber)->get(['id','name','pinStatus']);
         //     array_push($devicesArr,$userDevice);
@@ -63,6 +66,15 @@ class DeviceController extends Controller
             $device->is_active=1;
             $device->save();
 
+
+            $deviceRegistration=new DeviceRegistration();
+            $deviceRegistration->userId= $userId;
+            $deviceRegistration->deviceNumber= $deviceNumber;
+            $deviceRegistration->name=$device->name;
+            $deviceRegistration->details=$device->details;
+            $deviceRegistration->is_active=1;
+            $deviceRegistration->save();
+
             // add user to device
             $userDevice = new UserDevices();
             $userDevice->userId= $userId;
@@ -75,7 +87,7 @@ class DeviceController extends Controller
             for($i=0;$i<$device->pinsInDevice;$i++){
                 $DevicePins = new DevicePins();
                 $DevicePins->deviceNumber= $deviceNumber;
-                $DevicePins->name= 'Pin '.$i+1;
+                $DevicePins->name= 'Pin '.($i+1);
                 $DevicePins->pinNumber= $i+1;
                 $DevicePins->pinStatus= 0;
                 $DevicePins->is_active=1;
@@ -111,7 +123,7 @@ class DeviceController extends Controller
     public function show($id)
     {
         //
-        $device=Device::find($id);
+        $device=DeviceRegistration::find($id);
         return $device;
     }
 
@@ -124,7 +136,7 @@ class DeviceController extends Controller
     public function edit(Device $device, $id)
     {
         //
-        return view('edit_device')->with('device',Device::find($id));
+        return view('edit_device')->with('device',DeviceRegistration::find($id));
     }
 
     /**
@@ -136,7 +148,7 @@ class DeviceController extends Controller
      */
     public function update(Request $request)
     {
-        $device=Device::find($request->id);
+        $device=DeviceRegistration::find($request->id);
         if($device){
             $device->name = $request->name;
             $device->is_active = $request->is_active?'1':'0';
@@ -166,7 +178,7 @@ class DeviceController extends Controller
     public function destroy(Request $request, $id)
     {
         //
-        $device=Device::find($id);
+        $device=DeviceRegistration::find($id);
         if($device){
             $device->delete();
             $request->session()->flash('message', "Device Deleted");
@@ -176,7 +188,6 @@ class DeviceController extends Controller
             abort(404);
         }
     }
-
 
 
 

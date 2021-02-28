@@ -10,6 +10,7 @@ return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Device' => $baseDir . '/app/Device.php',
     'App\\DevicePins' => $baseDir . '/app/DevicePins.php',
+    'App\\DeviceRegistration' => $baseDir . '/app/DeviceRegistration.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\ActivitiesController' => $baseDir . '/app/Http/Controllers/ActivitiesController.php',
     'App\\Http\\Controllers\\Api\\ActivitiesController' => $baseDir . '/app/Http/Controllers/Api/ActivitiesController.php',
