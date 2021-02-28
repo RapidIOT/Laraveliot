@@ -30,7 +30,7 @@
                         <tbody>
                             @foreach ($reports as $report)
                           <tr>
-                            <th scope="row">{{$report->deviceNumber}}</th>
+                            <th scope="row">{{$report->deviceNumber?$report->deviceNumber:'--'}}</th>
                             <td>{{$report->activityById}}</td>
                             <td>{{$report->activityType}}</td>
                             <td>{{$report->created_at}}</td>

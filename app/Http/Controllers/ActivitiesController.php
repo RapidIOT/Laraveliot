@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Activities;
+use App\UserDevices;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +18,9 @@ class ActivitiesController extends Controller
     public function index()
     {
         //
-        return view('reports')->with('reports',Activities::where('activityById',Auth::id())->get());
+        
+        $userDeviceIdsArr=UserDevices::where('userId',Auth::id())->groupBy('deviceNumber')->pluck('deviceNumber');
+        return view('reports')->with('reports',Activities::where('activityById',Auth::id())->orwhereIn('deviceNumber',$userDeviceIdsArr)->get());
         // return view('reports')->with('reports',Activities::where('activityById',Auth::id())->paginate(5));
     }
 
