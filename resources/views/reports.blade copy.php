@@ -27,16 +27,18 @@
                             <th scope="col">Date</th>
                           </tr>
                         </thead>
-                        {{-- <tbody>
-                            @foreach ($reports as $report)
+                        <tbody>
+                            {{-- @foreach ($reports as $report)
                           <tr>
                             <th scope="row">{{$report->deviceNumber?$report->deviceNumber:'--'}}</th>
                             <td>{{$report->activityById}}</td>
                             <td>{{$report->activityType}}</td>
                             <td>{{$report->created_at}}</td>
                           </tr>
-                          @endforeach
-                        </tbody> --}}
+                          @endforeach --}}
+
+                         
+                        </tbody>
                       </table>
                 </div>
             </div>

@@ -14,6 +14,8 @@
                         </div>
                     @endif
 
+                    
+
                     <form method="POST" action="/update_profile" enctype="multipart/form-data">
                       @csrf
                     <table class="table table-bordered">
@@ -29,49 +31,52 @@
                           <tr>
                             <th>First Name</th>
                             <td>
-                              <input type="text" value="{{$pro->firstname}}" id="firstname" name="firstname" class="form-control" required>
+                              <input type="text" value="{{$pro->firstname}}" id="firstname" name="firstname" class="form-control @error('firstname') is-invalid @enderror">
+                              @error('firstname')
+                                  <div class="alert alert-danger">{{ $message }}</div>
+                              @enderror
                               </td>
                           </tr>
                           <tr>
                             <th>Last Name</th>
                             <td>
-                              <input type="text" value="{{$pro->lastname}}" id="lastname" name="lastname" class="form-control" required>
+                              <input type="text" value="{{$pro->lastname}}" id="lastname" name="lastname" class="form-control">
                               </td>
                           </tr>
                           <tr>
                             <th>Phone</th>
                             <td>
-                              <input type="text" value="{{$pro->phone}}" id="phone" name="phone" class="form-control" required>
+                              <input type="text" value="{{$pro->phone}}" id="phone" name="phone" class="form-control">
                               </td>
                           </tr>
                           <tr>
                             <th>City</th>
                             <td>
-                              <input type="text" value="{{$pro->city}}" id="city" name="city" class="form-control" required>
+                              <input type="text" value="{{$pro->city}}" id="city" name="city" class="form-control">
                              </td>
                           </tr>
                           <tr>
                             <th>State</th>
                             <td>
-                              <input type="text" value="{{$pro->state}}" id="state" name="state" class="form-control" required>
+                              <input type="text" value="{{$pro->state}}" id="state" name="state" class="form-control">
                               </td>
                           </tr>
                           <tr>
                             <th>Address</th>
                             <td>
-                              <input type="text" value="{{$pro->address}}" id="address" name="address" class="form-control" required>
+                              <input type="text" value="{{$pro->address}}" id="address" name="address" class="form-control">
                               </td>
                           </tr>
                           <tr>
                             <th>Zip Code</th>
                             <td>
-                              <input type="text" value="{{$pro->zipcode}}" id="zipcode" name="zipcode" class="form-control" required>
+                              <input type="text" value="{{$pro->zipcode}}" id="zipcode" name="zipcode" class="form-control">
                              </td>
                           </tr>
                           <tr>
                             <th>Email</th>
                             <td>
-                              <input type="text" value="{{$pro->email}}" id="email" name="email" class="form-control" readonly required>
+                              <input type="text" value="{{$pro->email}}" id="email" name="email" class="form-control" readonly>
                               </td>
                           </tr>
                           @endforeach

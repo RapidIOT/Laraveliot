@@ -37,6 +37,7 @@ Route::group(['middleware'=>['auth','verified']],function(){
    
    
     Route::get('/reports', 'ActivitiesController@index')->name('reports');    
+    Route::get('/reports-web-api', 'ActivitiesController@indexForAPI');    
 
 
     Route::get('/profile', 'UserController@index')->name('profile');   

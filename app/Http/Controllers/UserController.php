@@ -75,6 +75,13 @@ class UserController extends Controller
     {
         //
 
+        $validatedData = $request->validate([
+            'firstname' => ['required'],
+            'phone' => ['required'],
+        ]);
+
+        // return $validatedData;
+
         // return $request;
         $userDetails=User::find(Auth::id());
         if($userDetails){

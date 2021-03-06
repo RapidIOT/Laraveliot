@@ -15,7 +15,8 @@
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
-        "tymon/jwt-auth": "^1.0.0-rc.2"
+        "tymon/jwt-auth": "^1.0.0-rc.2",
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

@@ -56,10 +56,12 @@ class DeviceRegistrationController extends Controller
      */
     public function store(Request $request)
     {
+        
         // i need to create/store devices in database first
         $userId = Auth::id();
         $deviceNumber = $request->deviceNumber;
         $device = Device::where('deviceNumber',$deviceNumber)->first();
+        
         if($device && !$device->is_active){
             // device found
             // device activate
