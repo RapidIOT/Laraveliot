@@ -61,10 +61,19 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="/devices" role="button" v-pre>
-                                Devices
+                        <li class="nav-item dropdown">
+                            <a id="deviceDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Device
                             </a>
+                            
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="deviceDropdown">
+                                <a class="dropdown-item" href="/devices" role="button" v-pre>
+                                    Your Devices
+                                </a>
+                                <a class="dropdown-item" href="/add_device" role="button" v-pre>
+                                    Add Device
+                                </a>
+                            </div>
                         </li>
 
                         <li class="nav-item">

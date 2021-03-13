@@ -7,9 +7,13 @@ use App\DeviceRegistration;
 use App\Device;
 use App\UserDevices;
 use App\DevicePins;
+use App\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DevideShareEmail;
+Use \Carbon\Carbon;
 
 class DeviceRegistrationController extends Controller
 {
@@ -21,20 +25,24 @@ class DeviceRegistrationController extends Controller
      */
     public function index()
     {
+        ////Without Pins
         $userDeviceIdsArr=UserDevices::where('userId',Auth::id())->pluck('deviceNumber');
-        $userSharedDeviceIdsArr=UserDevices::where('canAccessBy',Auth::id())->where('userId','!=',Auth::id())->pluck('deviceNumber');
-        // return DeviceRegistration::whereIn('deviceNumber',$userDeviceIdsArr)->get();
+        $userSharedDeviceIdsArr=UserDevices::where('canAccessBy',Auth::id())->where('userId','!=',Auth::id())->whereNull('deleted_at')->pluck('deviceNumber');
         return view('devices')->with(['devicesArr'=>DeviceRegistration::whereIn('deviceNumber',$userDeviceIdsArr)->get(),'sharedDevicesArr'=>DeviceRegistration::whereIn('deviceNumber',$userSharedDeviceIdsArr)->get()]);
-        
-        // $devicesArr=array();
+
+        //with Pins
         // $userDeviceIdsArr=UserDevices::where('userId',Auth::id())->pluck('deviceNumber');
+        // $userSharedDeviceIdsArr=UserDevices::where('canAccessBy',Auth::id())->where('userId','!=',Auth::id())->pluck('deviceNumber');
+        // $devicesArr=array();
         // $userDevices= DeviceRegistration::whereIn('deviceNumber',$userDeviceIdsArr)->get();
         // foreach($userDevices as $userDevice){
         //     $userDevice->pins=DevicePins::where('deviceNumber',$userDevice->deviceNumber)->get(['id','name','pinStatus']);
         //     array_push($devicesArr,$userDevice);
         // }
         // // return $devicesArr;
-        // return view('devices')->with('devicesArr',$devicesArr);
+        // // return view('devices')->with('devicesArr',$devicesArr);
+        // return view('devices')->with(['devicesArr'=>$devicesArr,'sharedDevicesArr'=>DeviceRegistration::whereIn('deviceNumber',$userSharedDeviceIdsArr)->get()]);
+        
     }
 
     /**
@@ -138,7 +146,18 @@ class DeviceRegistrationController extends Controller
     public function edit(Device $device, $id)
     {
         //
-        return view('edit_device')->with('device',DeviceRegistration::find($id));
+        $device =  DeviceRegistration::find($id);
+         $sharedUsers=UserDevices::where('deviceNumber',$device->deviceNumber)->where('canAccessBy','!=',Auth::id())->get(['canAccessBy','id','deleted_at']);
+            $userDetails=array();
+            foreach($sharedUsers as $sharedUser){
+                // return $sharedUser->canAccessBy;
+                // return User::where('id',$sharedUser->canAccessBy)->get();
+                $sharedUser->userDetails = User::where('id',$sharedUser->canAccessBy)->get(['firstname']);
+                array_push($userDetails,$sharedUser);
+            }
+            // return $userDetails;
+        // return User::whereIn('id',$sharedUsers)->get();
+        return view('edit_device')->with(['device'=>$device,'sharedUsersArr'=>$userDetails]);
     }
 
     /**
@@ -150,6 +169,10 @@ class DeviceRegistrationController extends Controller
      */
     public function update(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => ['required']
+        ]);
+
         $device=DeviceRegistration::find($request->id);
         if($device){
             $device->name = $request->name;
@@ -160,7 +183,7 @@ class DeviceRegistrationController extends Controller
         }else{
             logActivity($activityType="Device Update",$deviceNumber=$device->deviceNumber,$deviceStatus=$device->is_active,$pinId="-",$pinStatus="-",$details="Device Details Updated",$sharedControlWith="0");
             // logActivity($device->deviceNumber,"userID","Device Details Updated","remarks","Edit Device");
-            $request->session()->flash('message', "Device Updated");
+            $request->session()->flash('deviceUpdateMessage', "Device Updated");
             return redirect('devices');
         }
         }else{
@@ -191,6 +214,60 @@ class DeviceRegistrationController extends Controller
         }
     }
 
+
+    public function shareDeviceWithEmail(Request $request)
+    {
+        $validatedData = $request->validate([
+            'email' => ['required', 'string', 'email', 'max:255']
+        ]);
+        $userId = Auth::id();
+        $sharedBy =  Auth::user();
+        $deviceNumber = $request->deviceNumber;
+        
+        $shareWith = User::where('email', '=', $request->email)->first();
+        if ($shareWith === null) {
+            return "no user found in users table";
+        }else{
+            // add user to device
+            if(UserDevices::where('canAccessBy', '=', $shareWith->id)->first()){
+                $request->session()->flash('shareDeviceStatusError', "You have already shared this device with ".$request->email);
+                return redirect()->back();
+            }else{
+                $userDevice = new UserDevices();
+                $userDevice->userId= $userId;
+                $userDevice->deviceNumber= $deviceNumber;
+                $userDevice->canAccessBy= $shareWith->id;
+                $userDevice->is_active=1;
+                $userDevice->save();
+                Mail::to($request->email)->send(new DevideShareEmail($shareWith, $sharedBy));
+                $request->session()->flash('status', "Device Shared");
+                return redirect('devices');
+            }
+            
+        }
+        
+
+    }
+
+
+
+    
+    public function changeDeviceShare(Request $request)
+    {
+        $userDevices=UserDevices::find($request->id);
+        if($userDevices){
+            $userDevices->deleted_at = $request->shareStatus==1?null:Carbon::now();;
+            $saved = $userDevices->save();
+        if(!$saved){
+            abort(500, 'Error');
+        }else{
+            $request->session()->flash('message', "Sharing updated");
+            return response()->json(['success' => true,'message'=>'Sharing updated'],200);
+        }
+        }else{
+            return "Device Not Found";
+        }
+    }
 
 
 }

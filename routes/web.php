@@ -28,6 +28,8 @@ Route::group(['middleware'=>['auth','verified']],function(){
     Route::get('/add_device', 'DeviceRegistrationController@create')->name('add_device');
     Route::post('/add_device', 'DeviceRegistrationController@store');
     Route::get('/edit_device/{id}', 'DeviceRegistrationController@edit')->name('edit_device');
+    Route::post('/share_device', 'DeviceRegistrationController@shareDeviceWithEmail');
+    Route::post('/change_device_share', 'DeviceRegistrationController@changeDeviceShare');
     Route::post('/update_device/{id}', 'DeviceRegistrationController@update');
     Route::get('/delete_device/{id}', 'DeviceRegistrationController@destroy')->name('delete_device'); 
     
