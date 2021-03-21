@@ -231,6 +231,7 @@ class DeviceRegistrationController extends Controller
         if ($shareWith === null) {
             // return "no user found in users table";
             $userPassword= Str::random(12);
+            // return $userPassword;
             $user = new User();
             $user->email = $request->email;
             $user->password = Hash::make($userPassword);

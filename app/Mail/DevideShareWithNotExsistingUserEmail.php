@@ -23,6 +23,7 @@ class DevideShareWithNotExsistingUserEmail extends Mailable
         //
         $this->shareWith= $shareWith;
         $this->sharedBy= $sharedBy;
+        $this->userPassword= $userPassword;
     }
 
     /**
