@@ -16,6 +16,7 @@ use App\Mail\DevideShareEmail;
 use App\Mail\DevideShareWithNotExsistingUserEmail;
 Use \Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DeviceRegistrationController extends Controller
 {
@@ -229,17 +230,17 @@ class DeviceRegistrationController extends Controller
         $shareWith = User::where('email', '=', $request->email)->first();
         if ($shareWith === null) {
             // return "no user found in users table";
-            $userPassword= 'password';
+            $userPassword= Str::random(12);
             $user = new User();
             $user->email = $request->email;
             $user->password = Hash::make($userPassword);
-            $user->firstname = 'firstname';
-            $user->lastname = 'firstname';
-            $user->phone = 'firstname';
-            $user->city = 'firstname';
-            $user->state = 'firstname';
-            $user->address = 'firstname';
-            $user->zipcode = 'firstname';
+            $user->firstname = 'Firstname';
+            $user->lastname = 'Lastname';
+            $user->phone = '9999999999';
+            $user->city = 'City';
+            $user->state = 'Satate';
+            $user->address = 'Address';
+            $user->zipcode = '000000';
             $user->createed_by_id = $userId;
             $user->email_verified_at = Carbon::now();
             $user->save();
