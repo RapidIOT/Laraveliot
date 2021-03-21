@@ -1,4 +1,4 @@
-<h1> Hello {{$shareWith->firstname}},</h1>
+<h4> Hello {{$shareWith->firstname}},</h4>
 
 <p>{{$sharedBy->firstname}}, has shared his device access with you.</p>
 
