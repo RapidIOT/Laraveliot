@@ -13,7 +13,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DevideShareEmail;
+use App\Mail\DevideShareWithNotExsistingUserEmail;
 Use \Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class DeviceRegistrationController extends Controller
 {
@@ -226,7 +228,37 @@ class DeviceRegistrationController extends Controller
         
         $shareWith = User::where('email', '=', $request->email)->first();
         if ($shareWith === null) {
-            return "no user found in users table";
+            // return "no user found in users table";
+            $userPassword= 'password';
+            $user = new User();
+            $user->email = $request->email;
+            $user->password = Hash::make($userPassword);
+            $user->firstname = 'firstname';
+            $user->lastname = 'firstname';
+            $user->phone = 'firstname';
+            $user->city = 'firstname';
+            $user->state = 'firstname';
+            $user->address = 'firstname';
+            $user->zipcode = 'firstname';
+            $user->createed_by_id = $userId;
+            $user->email_verified_at = Carbon::now();
+            $user->save();
+            // $user->sendEmailVerificationNotification();
+            // return $user;
+
+
+
+            $userDevice = new UserDevices();
+            $userDevice->userId= $userId;
+            $userDevice->deviceNumber= $deviceNumber;
+            $userDevice->canAccessBy= $user->id;
+            $userDevice->is_active=1;
+            $userDevice->save();
+            Mail::to($request->email)->send(new DevideShareWithNotExsistingUserEmail($user, $sharedBy, $userPassword));
+            $request->session()->flash('status', "Device Shared");
+            return redirect('devices');
+            
+
         }else{
             // add user to device
             if(UserDevices::where('canAccessBy', '=', $shareWith->id)->first()){
