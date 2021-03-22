@@ -145,7 +145,7 @@ class DeviceController extends Controller
             abort(500, 'Error');
         }else{
             logActivity($activityType="Device Update",$deviceNumber=$device->deviceNumber,$deviceStatus=$device->is_active,$pinId="-",$pinStatus="-",$details="Device Details Updated",$sharedControlWith="0");
-            // logActivity($device->deviceNumber,"userID","Device Details Updated","remarks","Edit Device");
+            
             $request->session()->flash('message', "Device Updated");
             return redirect('devices');
         }

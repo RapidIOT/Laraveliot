@@ -78,7 +78,7 @@
         serverSide:true,
         ajax:"{{url('reports-web-api?userid=')}}"+userid,
         columns:[{data:"deviceNumber"},{data:"activityById"},{data:"activityType"},{data:"created_at"}],
-        pageLength:3
+        pageLength:30
     });
 
 

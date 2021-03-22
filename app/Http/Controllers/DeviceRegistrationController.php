@@ -107,6 +107,8 @@ class DeviceRegistrationController extends Controller
                 $DevicePins->save();
             }
 
+            logActivity($activityType="New Device Added",$deviceNumber=$deviceNumber,$deviceStatus=1,$pinId="-",$pinStatus="-",$details="New Device Added",$sharedControlWith="0");
+
             $request->session()->flash('status', "New Device Added");
             return redirect('devices');
 
@@ -257,6 +259,8 @@ class DeviceRegistrationController extends Controller
             $userDevice->is_active=1;
             $userDevice->save();
             Mail::to($request->email)->send(new DevideShareWithNotExsistingUserEmail($user, $sharedBy, $userPassword));
+            logActivity($activityType="Device Shared with NoN exsisting user",$deviceNumber=$deviceNumber,$deviceStatus=1,$pinId="-",$pinStatus="-",$details="Device Shared by ".$sharedBy->firstname." with ".$request->email,$sharedControlWith="0");
+
             $request->session()->flash('status', "Device Shared");
             return redirect('devices');
             
@@ -274,6 +278,7 @@ class DeviceRegistrationController extends Controller
                 $userDevice->is_active=1;
                 $userDevice->save();
                 Mail::to($request->email)->send(new DevideShareEmail($shareWith, $sharedBy));
+                logActivity($activityType="Device Shared with exsisting user",$deviceNumber=$deviceNumber,$deviceStatus=1,$pinId="-",$pinStatus="-",$details="Device Shared by ".$sharedBy->firstname." with ".$request->email,$sharedControlWith="0");
                 $request->session()->flash('status', "Device Shared");
                 return redirect('devices');
             }
@@ -295,6 +300,8 @@ class DeviceRegistrationController extends Controller
         if(!$saved){
             abort(500, 'Error');
         }else{
+            logActivity($activityType="Updated Device Share",$deviceNumber=$userDevices->deviceNumber,$deviceStatus=1,$pinId="-",$pinStatus="-",$details="Updated Device Share",$sharedControlWith="0");
+
             $request->session()->flash('message', "Sharing updated");
             return response()->json(['success' => true,'message'=>'Sharing updated'],200);
         }

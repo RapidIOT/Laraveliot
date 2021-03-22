@@ -103,6 +103,9 @@ class UserController extends Controller
         if(!$saved){
             abort(500, 'Error');
         }else{
+
+            logActivity($activityType="Profile Updated",$deviceNumber="_",$deviceStatus="_",$pinId="-",$pinStatus="-",$details="Profile Updated",$sharedControlWith="0");
+
             $request->session()->flash('message', "User Updated");
             return redirect('profile');
         }

@@ -71,7 +71,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        print_r($data);
+        // print_r($data);
         return User::create([
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
@@ -84,5 +84,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        logActivity($activityType="New User Registration",$deviceNumber="-",$deviceStatus="-",$pinId="-",$pinStatus="-",$details="New User Registration",$sharedControlWith="0");
     }
 }
