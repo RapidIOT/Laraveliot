@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 
 use App\Device;
+use App\UserDevices;
+use App\DeviceRegistration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DeviceController extends Controller
 {
@@ -15,8 +18,30 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        //
-        return Device::all();
+
+
+        $userDeviceIdsArr=UserDevices::where('userId',Auth::id())->pluck('deviceNumber');
+        $userSharedDeviceIdsArr=UserDevices::where('canAccessBy',Auth::id())->where('userId','!=',Auth::id())->whereNull('deleted_at')->pluck('deviceNumber');
+
+        $devicesArr = DeviceRegistration::whereIn('deviceNumber',$userDeviceIdsArr)->get();
+        $sharedDevicesArr = DeviceRegistration::whereIn('deviceNumber',$userSharedDeviceIdsArr)->get();
+        
+        if(count($devicesArr)!=0 || count($sharedDevicesArr)!=0){
+            $devices = array(
+                "devicesArr"=>$devicesArr,
+                "sharedDevicesArr" =>$sharedDevicesArr
+            );
+
+            return response()->json(['success' => true,'data'=>$devices],200); 
+        }else{
+            $json = [
+                'success' => false,
+                'error' => [
+                    'message' => "No Devices Found",
+                ],
+            ];
+            return response()->json($json, 401);
+        }
     }
 
     /**
@@ -100,8 +125,6 @@ class DeviceController extends Controller
      */
     public function destroy($id)
     {
-        //
-
         $device=Device::find($id);
         if($device){
             $device->delete();
@@ -111,32 +134,6 @@ class DeviceController extends Controller
         //you can add custom message here
         return $device;
     }
-
-
-
-    // public function getDevicesByUserID($userId)
-    // {
-    //     $device = Device::where('userId', $userId)->first();
-    //     // return $device;
-    //     return response()->json(['success' => true,'data'=>$device],200); 
-    // }
-
-
-    // public function updateDevicesByUserID(Request $request, $userId)
-    // {
-    //     // return $userId;
-    //     $device=Device::where('userId', $userId)->first();
-    //     if($device){
-    //         // $room1->userId = $request->userId;
-    //         $device->powerPins = $request->powerPins;
-    //         $device->save();
-    //     }else{
-    //         return "Device Required Not Found";
-    //     }
-    //     //you can add custom message here
-    //     return $device;
-    // }
-
 
 
 }

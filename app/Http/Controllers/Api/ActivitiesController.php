@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Activities;
 use Illuminate\Http\Request;
-
+use App\UserDevices;
+use App\User;
+use Yajra\DataTables\Facades\DataTables;
 class ActivitiesController extends Controller
 {
     /**
@@ -16,6 +18,28 @@ class ActivitiesController extends Controller
     {
         //
     }
+
+
+
+    public function indexForAPI(Request $request)
+    {
+        $userid=$request->userid;
+        $userDeviceIdsArr=UserDevices::where('userId',$userid)->groupBy('deviceNumber')->pluck('deviceNumber');
+        //  $activities = Activities::where('activityById',$userid)->orwhereIn('deviceNumber',$userDeviceIdsArr)->get();
+         $activities = Activities::select('deviceNumber','activityType','activityById','created_at')->where('activityById',$userid)->orwhereIn('deviceNumber',$userDeviceIdsArr);
+
+        //  return datatables($activities)->make(true);
+        //  return DataTables::of($activities)->editColumn('activityById',20000)->make(true);
+        
+         return DataTables::of($activities)->editColumn('activityById',function($data){
+            $user = User::select('firstname')->where('id',$data->activityById)->first();
+             return $user->firstname;
+            })->editColumn('created_at',function($data){
+                // return $data->created_at." - ".$data->created_at->diffForHumans();
+                return $data->created_at;
+            })->make(true);
+    }
+
 
     /**
      * Show the form for creating a new resource.
