@@ -41,6 +41,10 @@ class ActivitiesController extends Controller
     }
 
 
+    public function samplepost(Request $request){
+        return $request;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

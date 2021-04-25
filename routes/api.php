@@ -16,6 +16,8 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::get('/reports', [ActivitiesController::class, 'indexForAPI']);
 
+Route::post('/samplepost', [ActivitiesController::class, 'samplepost']);
+
 Route::group([
     'middleware' => 'auth:api',
     // 'prefix' => 'auth'
