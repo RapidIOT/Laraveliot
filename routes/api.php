@@ -9,18 +9,19 @@ use App\Http\Controllers\Api\ActivitiesController;
 // Route::post('refresh', 'AuthController@refresh');
 // Route::post('me', 'AuthController@me');
 Route::get('status', function(){ return "Api is working fine";});
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+Route::post('register', [AuthController::class, "appUserRegistration"]);
 Route::post('login', [AuthController::class, 'login']); 
 
-Route::get('/reports', [ActivitiesController::class, 'indexForAPI']);
-
-Route::post('/samplepost', [ActivitiesController::class, 'samplepost']);
 
 Route::group([
     'middleware' => 'auth:api',
     // 'prefix' => 'auth'
 ], function () {
     Route::get('devices', [DeviceController::class, 'index']);
+    Route::get('/reports', [ActivitiesController::class, 'indexForAPI']);
+
 });

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 function logActivity($activityType="-",$deviceNumber="-",$deviceStatus="-",$pinId="-",$pinStatus="-",$details="-",$sharedControlWith="-"){
     $activity=new Activities();
     $activity->activityType = $activityType;
-    $activity->activityById = Auth::id();
+    $activity->activityById = Auth::id()?Auth::id():"0";
     $activity->deviceNumber = $deviceNumber;
     $activity->deviceStatus = $deviceStatus;
     $activity->activityType = $activityType;

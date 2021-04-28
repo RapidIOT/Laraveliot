@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\User;
+use Illuminate\Support\Facades\Hash;
+
 
 // use JWTAuth;
 
@@ -18,8 +21,53 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        // $this->middleware('auth:api', ['except' => ['login','register']]);
     }
+
+
+
+    public function appUserRegistration(Request $request)
+    {
+        // return $request;
+        // print_r($request);
+        $newuser= User::create([
+            'firstname' => $request['firstname'],
+            'lastname' => $request['lastname'],
+            'phone' => $request['phone'],
+            'city' => $request['city'],
+            'state' => $request['state'],
+            'address' => $request['address'],
+            'zipcode' => $request['zipcode'],
+            'avatar' => $request['avatar'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+        ]);
+
+        if($newuser){
+
+            logActivity($activityType="New User Registration from App",$deviceNumber="-",$deviceStatus="-",$pinId="-",$pinStatus="-",$details="New User Registration from Mobile app",$sharedControlWith="0");
+
+            $data = array(
+                "user"=>$newuser,
+                "message" =>"New User created"
+            );
+
+            return response()->json(['success' => true,'data'=>$data],200);
+        }else{
+            $json = [
+                'success' => false,
+                'error' => [
+                    'message' => "User not created please try again",
+                ],
+            ];
+            return response()->json($json, 401);
+        }
+        
+    }
+
+
+
+
 
     /**
      * Get a JWT via given credentials.
@@ -91,4 +139,10 @@ class AuthController extends Controller
             'user'=>auth()->user()
         ]);
     }
+
+
+
+
+    
+
 }
