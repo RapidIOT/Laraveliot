@@ -13,6 +13,7 @@
     {{-- <meta http-equiv="X-Frame-Options" content="sameorigin"> --}}
     @php
         header("X-Frame-Options: DENY");
+        header('Access-Control-Allow-Origin: *');
     @endphp
 </head>
 
@@ -26,7 +27,7 @@
         <header>
           <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
               <div class="container">
-              <a class="navbar-brand" href="#">Carousel</a>
+              <a class="navbar-brand" href="#">Rapid IOT</a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
