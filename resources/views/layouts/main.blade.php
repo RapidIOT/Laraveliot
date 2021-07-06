@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/carousel/carousel.css" />
 
-    <meta http-equiv="X-Frame-Options" content="deny">
+    {{-- <meta http-equiv="X-Frame-Options" content="deny"> --}}
     {{-- <meta http-equiv="X-Frame-Options" content="sameorigin"> --}}
     @php
-        // header("X-Frame-Options: DENY");
+        header("X-Frame-Options: DENY");
     @endphp
 </head>
 
