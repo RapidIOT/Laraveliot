@@ -1,7 +1,6 @@
 @extends('layouts.main')
 
 
-<div class="flex-center position-ref full-height">
     @section('main-menu')
         @if (Route::has('login'))
                 @auth
@@ -23,5 +22,4 @@
         </div>
 
     </div>
-</div>
 @endsection

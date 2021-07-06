@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/carousel/carousel.css" />
 
-    {{-- <meta http-equiv="X-Frame-Options" content="deny"> --}}
+    <meta http-equiv="X-Frame-Options" content="deny">
     {{-- <meta http-equiv="X-Frame-Options" content="sameorigin"> --}}
     @php
-        header("X-Frame-Options: DENY");
+        // header("X-Frame-Options: DENY");
     @endphp
 </head>
 
@@ -89,11 +89,12 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
-    
+          <div class="flex-center position-ref full-height">
+
           <div class="container">
             @yield('content')
         </div>
-    
+          </div>
           <!-- Marketing messaging and featurettes
           ================================================== -->
           <!-- Wrap the rest of the page in another container to center all the content. -->
