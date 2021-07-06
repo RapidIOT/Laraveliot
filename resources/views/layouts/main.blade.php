@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/carousel/carousel.css" />
 
     <meta http-equiv="X-Frame-Options" content="deny">
-    <meta http-equiv="X-Frame-Options" content="sameorigin">
+    {{-- <meta http-equiv="X-Frame-Options" content="sameorigin"> --}}
 </head>
 
 <body>
