@@ -11031,3 +11031,14 @@ input:checked + .slider:before {
   border-width: 1px;
 }
 
+.carousel-item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: auto;
+  right: 0;
+  bottom: 0;
+  max-width: 100%;
+}
+
