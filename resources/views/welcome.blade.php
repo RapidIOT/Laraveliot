@@ -18,7 +18,7 @@
 @section('content')
     <div class="content">
         <div class="title m-b-md">
-            Rapid IOT Welcome Page
+            Welcome Page
         </div>
 
     </div>
